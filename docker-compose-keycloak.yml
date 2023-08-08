@@ -1,0 +1,20 @@
+version: '3'
+#
+# Keycloak specific docker-compose as combining it with other containers causes it to fail on startup
+# for a yet unknown reason ....
+#
+services:
+
+  sbrrr2-keycloak:
+    image: jboss/keycloak
+    restart: 'no'
+    volumes:
+      - ./test-container-config/keycloak/provisioning:/opt/jboss/keycloak/imports
+    environment:
+      KEYCLOAK_IMPORT: /opt/jboss/keycloak/imports/springboot-realm.json -Dkeycloak.profile.feature.upload_scripts=enabled
+      KEYCLOAK_USER: admin
+      KEYCLOAK_PASSWORD: admin
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+    ports:
+      - "7070:8080"
