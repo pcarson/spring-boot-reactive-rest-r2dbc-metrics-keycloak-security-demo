@@ -1,7 +1,7 @@
 # springboot 3 reactive rest + r2dbc/metrics/grafana demo secured by keycloak security
 
 ### overview
-This demo repository contains a springboot 3 maven project which
+This demo repository contains a springboot 3, spring 6 maven project which
 
 * exposes a Spring Reactive REST API to maintain a 'user' object
   * NOTE that [as per ](https://docs.spring.io/spring-framework/docs/5.0.0.RC4/spring-framework-reference/reactive-web.html) the decision was taken to implement RequestMapping interface rather than RouterFunctions, to support:
@@ -111,3 +111,12 @@ This access token can then be used as a Bearer token to access the API endpoints
 ### tests and code coverage
 The project is also configured to produce code coverage data using the jacoco maven plugin.
 After a build, this information can be found here: target/site/jacoco/index.html
+
+### Sonar
+Sonar can be built stand-alone as detailed below if you have access to an instance.
+NB You'll need to update the 'sonar' properties in the pom.xml file to identify the host and login token to be used when sending analysis to sonar.
+
+```$xslt
+mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install -DskipITs=true
+mvn sonar:sonar
+```
